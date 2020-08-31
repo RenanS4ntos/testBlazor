@@ -1,0 +1,46 @@
+@page "/todos"
+
+<Container>
+    <Addons>
+        <Addon AddonType="AddonType.Body">
+            <TextEdit Placeholder="Adicionar Tarefa" @bind-Text="newTodo"/>
+        </Addon>
+        <Addon AddonType="AddonType.End">
+            <Button Color="Color.Dark" @onclick="AddTask">Add</Button>
+        </Addon>
+    </Addons>
+</Container>
+
+<Container>
+    @foreach (var titulo in listTodo)
+    {
+        <Table Bordered="true">
+            <TableRow>
+                <TableRowCell> 
+                    <Check TValue="bool">
+                        @titulo.Item
+                    </Check>
+                </TableRowCell>
+            </TableRow>
+        </Table>
+    }
+</Container>
+
+@code {
+
+    List<Todo> listTodo;
+    public string newTodo{ get; set; }
+    private void AddTask()
+    {
+        listTodo.Add(new Todo() {Item = newTodo});
+    }
+
+    protected override void OnInitialized()
+    {
+        listTodo = new List<Todo>()
+        {
+            
+        };
+    }
+}
+    
